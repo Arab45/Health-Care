@@ -20,7 +20,7 @@ const sendMail = (to, subject, body) => {
       });
 
       const emailBody = {
-        from: `"Edu Connect" <${process.env.EMAIL_USERNAME}>`,  // sender address
+        from: `"HEALTH ASSURED" <${process.env.EMAIL_USERNAME}>`,  // sender address
         replyTo: process.env.APP_EMAIL,  // sender address
         to: to,  // list of receivers
         subject: subject,  // Subject line

@@ -16,7 +16,7 @@ const userSchema = new Schema({
     },
     password: {
         type: String,
-        required: truecls
+        required: true
     },
     resetPaswordToken: {
         type: String
