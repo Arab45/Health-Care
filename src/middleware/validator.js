@@ -31,6 +31,31 @@ const validateSignUp = [
     .withMessage('Password must contain both letters and numbers'),
 ];
 
+const validateProvider = [
+    check('name')
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage('full name is missing'),
+    check('email').trim()
+    .not()
+    .isEmpty()
+    .withMessage('email is missing')
+    .isEmail()
+    .withMessage('email is not valid')
+    .isLowercase(),
+    check('phone')
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage('phone is missing'),
+    check('specialization')
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage('specialization is missing')
+]
+
 const validation = (req, res, next) => {
     const error = validationResult(req).array();
     if(error.length > 0){
@@ -41,6 +66,7 @@ const validation = (req, res, next) => {
     };
 
 module.exports = {
+    validateProvider,
     validateSignUp,
     validation
 }
