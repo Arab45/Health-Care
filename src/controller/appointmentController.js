@@ -1,7 +1,7 @@
 const { sendSuccess, sendError } = require("../middleware/index");
 const Appointment = require("../model/Appointment");
 
-const createAppointment = async (req, resizeBy, next) => {
+const createAppointment = async (req, res, next) => {
     const newProvider = new Appointment({
         ...req.body
     });
@@ -17,7 +17,7 @@ const createAppointment = async (req, resizeBy, next) => {
 };
 
 const fetchAllAppointment = async (req, res, next) => {
-    const {page, pageSize} = req.query;
+    let { page, pageSize } = req.query;
 
     page = parseInt(page, 10) || 1;
     pageSize = parseInt(pageSize, 10) || 5;
@@ -34,7 +34,7 @@ const fetchAllAppointment = async (req, res, next) => {
   
           const data = {
             allProfile: {
-                metadata: { totalCount: allAnswer[0].metadata[0].totalCount, page, pageSize },
+                metadata: { totalCount: allAppointment[0].metadata[0].totalCount, page, pageSize },
                 data: allAppointment[0].data,
               },
           };
@@ -48,7 +48,7 @@ const fetchAllAppointment = async (req, res, next) => {
 const updateAppointment = async (req, res, next) => {
     const { id } = req.params;
     try {
-        const updatedAppointment = await Appointment.findByIdAndUpdate(id);
+        const updatedAppointment = await Appointment.findByIdAndUpdate(id, {$set: req.body}, {now: true});
         if(!updatedAppointment){
             return sendError(res, 'user data does not exist, sign up instead')
         };

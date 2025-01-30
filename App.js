@@ -8,7 +8,8 @@ const providerRouter = require('./src/router/providerRouter');
 const recaptchaRouter = require('./src/router/recapchaRouter');
 const paystackRouter = require('./src/router/paystackRouter');
 const adminRouter = require('./src/router/adminRouter');
-
+const appointmentRouter = require('./src/router/appointmentRouter');
+const feedbackRouter = require('./src/router/feedbackRouter');
 
 
 const corsOptions = {
@@ -25,6 +26,8 @@ app.use('/api/v1', providerRouter);
 app.use('/api/v1', recaptchaRouter);
 app.use(paystackRouter);
 app.use('/Admin', adminRouter);
+app.use('/appointment', appointmentRouter);
+app.use('/feedback', feedbackRouter);
 
 
 

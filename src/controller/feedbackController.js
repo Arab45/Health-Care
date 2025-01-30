@@ -1,8 +1,7 @@
 const { sendSuccess, sendError } = require("../middleware/index");
 const Feedback = require("../model/Feedback");
-const { fetchAllAppointment } = require("./appointmentController");
 
-const createFeedback = async (req, resizeBy, next) => {
+const createFeedback = async (req, res, next) => {
     const newProvider = new Feedback({
         ...req.body
     });
@@ -18,7 +17,7 @@ const createFeedback = async (req, resizeBy, next) => {
 };
 
 const fetchAllFeedback = async (req, res, next) => {
-    const {page, pageSize} = req.query;
+    let {page, pageSize} = req.query;
 
     page = parseInt(page, 10) || 1;
     pageSize = parseInt(pageSize, 10) || 5;
@@ -35,7 +34,7 @@ const fetchAllFeedback = async (req, res, next) => {
   
           const data = {
             allProfile: {
-                metadata: { totalCount: allAnswer[0].metadata[0].totalCount, page, pageSize },
+                metadata: { totalCount: allFeedback[0].metadata[0].totalCount, page, pageSize },
                 data: allFeedback[0].data,
               },
           };
@@ -48,7 +47,7 @@ const fetchAllFeedback = async (req, res, next) => {
 const updateFeedback = async (req, res, next) => {
     const { id } = req.params;
     try {
-        const updatedFeedback = await Feedback.findByIdAndUpdate(id);
+        const updatedFeedback = await Feedback.findByIdAndUpdate(id, {$set: req.body}, {now: true});
         if(!updatedFeedback){
             return sendError(res, 'user data does not exist, sign up instead')
         };

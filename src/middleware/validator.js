@@ -54,6 +54,57 @@ const validateProvider = [
     .not()
     .isEmpty()
     .withMessage('specialization is missing')
+];
+
+const validateAppointment = [
+    check('user')
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage('user is missing'),
+    check('provider')
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage('provider is missing'),
+    check('date')
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage('date is missing'),
+    check('time')
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage('specialization is missing')
+];
+
+const validateFeedback = [
+    check('user')
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage('user is missing'),
+    check('provider')
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage('provider is missing'),
+    check('appointment')
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage('appointment is missing'),
+    check('rating')
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage('rating is missing'),
+    check('comment')
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage('comment is missing')
 ]
 
 const validation = (req, res, next) => {
@@ -66,6 +117,8 @@ const validation = (req, res, next) => {
     };
 
 module.exports = {
+    validateAppointment,
+    validateFeedback,
     validateProvider,
     validateSignUp,
     validation
